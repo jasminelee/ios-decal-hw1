@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 //: ## Q1: Optionals
 class Words {
     var wordA : String!
@@ -22,33 +21,41 @@ class Words {
 //: ### variables the same type? If not, why?
 
 
-//: [EXPLAIN YOUR ANSWER HERE]
+//: Yes, they are both optionals. However, the instance variables are implicitly unwrapped optionals.
 
 
 //: ## Q2: Variable Types and Function Types
-    func arePalindromes(_ words: [String]) -> Bool {
+    
+    class func arePalindromes(words: [String]) -> Bool {
         let reversedWords = words.map() {String($0.characters.reversed())}
-        let numElements = words.count
+        let numWords = words.count
         
-        for i in 0 ..< numElements {
-            if words[i] != reversedWords[i] {
-                return false
+        for i in 0..<numWords {
+            let original = words[i]
+            let reversedCopy = reversedWords[i]
+
+            for index in original.characters.indices {
+                if original[index] != reversedCopy[index] {
+                    return false
+                }
             }
         }
+        return true
     }
+    
+
 //: ### Why does the compiler dislike the **for loop**? Fix it.
 //: ### What else is wrong with this function? You may have to refer to (but **not**
 //: ### change) the code at the very bottom. Debug the function.
 
-
-//: [EXPLAIN YOUR ANSWER HERE]
+//: The issue with this function was that it wasn't logically correct. It wasn't actually checking each character in each string to see if the input list was a palindrome. Additionally, I had to change the modifer from instance to class method.
 
 
 //: ## Q3: More Functions and Object Initialization
-    class func isAnagram() -> Bool {
-        var countLetters : [Character : Int] //Line X
-        var lenA = self.wordA.characters.count
-        var lenB = self.wordB.characters.count
+    func isAnagram() -> Bool {
+        var countLetters : [Character : Int] = [Character :Int]() //Line X
+        let lenA = self.wordA.characters.count
+        let lenB = self.wordB.characters.count
         
         if lenA != lenB {
             return false
@@ -81,7 +88,7 @@ class Words {
             }
         }
         
-        return nil
+        return true
     }
 //: ### What is the problem with declaring **countLetters** as we do in **Line X**,
 //: ### and then using it in **Line Y**? Fix it (by only changing **Line X**).
@@ -89,7 +96,7 @@ class Words {
 //: ### change) the code at the very bottom. Debug the function.
 
 
-//: [EXPLAIN YOUR ANSWER HERE]
+//: The issue with the original countLetters code was that it was declared but never initialized. Another problem with this function was that it was originally a class method; I changed it to become an instance method. Furthermore, I changed lenA and lenB to become immutable, but only bc the IDE told me to.
     
     
 }
@@ -102,8 +109,8 @@ class Words {
 
 
 //: **DO NOT** touch any code below this point.
-Words.arePalindromes(["hih", "racecar", "mom", "wow"])
-Words.arePalindromes(["gene", "shawn", "hello"])
+Words.arePalindromes(words: ["hih", "racecar", "mom", "wow"])
+Words.arePalindromes(words: ["gene", "shawn", "hello"])
 var wordsObj = Words.init(wordA: "anagram", wordB: "managra")
 wordsObj.isAnagram()
 wordsObj.wordA = "hello"
