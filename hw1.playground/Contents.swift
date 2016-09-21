@@ -26,7 +26,7 @@ class Words {
 
 //: ## Q2: Variable Types and Function Types
     
-    class func arePalindromes(words: [String]) -> Bool {
+    class func arePalindromes(_ words: [String]) -> Bool {
         let reversedWords = words.map() {String($0.characters.reversed())}
         let numWords = words.count
         
@@ -109,8 +109,8 @@ class Words {
 
 
 //: **DO NOT** touch any code below this point.
-Words.arePalindromes(words: ["hih", "racecar", "mom", "wow"])
-Words.arePalindromes(words: ["gene", "shawn", "hello"])
+Words.arePalindromes(["hih", "racecar", "mom", "wow"])
+Words.arePalindromes(["gene", "shawn", "hello"])
 var wordsObj = Words.init(wordA: "anagram", wordB: "managra")
 wordsObj.isAnagram()
 wordsObj.wordA = "hello"
